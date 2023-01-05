@@ -1,0 +1,183 @@
+\RequirePackage{tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     TODOs for next version                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 1. Include Other Logos (maybe wait for Logo-Generator)? 
+% 2. Department Name on Slides?
+% 3. Include Option for Navigation?
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       RPTU Colors                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% default coincides with blue scheme
+\definecolor{rptu1}{RGB}{4,44,88}
+\definecolor{rptu2}{RGB}{106,178,231}
+
+\definecolor{rptublaugrau}{RGB}{80,114,137}
+\definecolor{rptugruengrau}{RGB}{119,182,186}
+\definecolor{rptudunkelblau}{RGB}{4,44,88}
+\definecolor{rptuhellblau}{RGB}{106,178,231}
+\definecolor{rptudunkelgruen}{RGB}{0,107,107}
+\definecolor{rptuhellgruen}{RGB}{38,208,124}
+\definecolor{rptuviolett}{RGB}{76,53,117}
+\definecolor{rptupink}{RGB}{209,56,150}
+\definecolor{rpturot}{RGB}{227,27,76}
+\definecolor{rptuorange}{RGB}{255,162,82}
+\definecolor{rptuschwarz}{RGB}{0,0,0}
+\definecolor{rptuweiss}{RGB}{255,255,255}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Declare Options                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 1. Option: Show total number of slides
+\newif\ifRPTU@displayTotalFrameNumber%
+\DeclareOptionBeamer{frametotal}[false]{\csname RPTU@displayTotalFrameNumber#1\endcsname}
+% alternating commands
+\DeclareOptionBeamer{displayframetotal}{%
+	\RPTU@displayTotalFrameNumbertrue}
+\DeclareOptionBeamer{hideframetotal}{%
+	\RPTU@displayTotalFrameNumberfalse}
+	
+% 2. Option: Main Color
+\DeclareOptionBeamer{blaugrau}{
+	\definecolor{rptu1}{named}{rptublaugrau}
+	\definecolor{rptu2}{named}{rptugruengrau}
+}
+\DeclareOptionBeamer{gruengrau}{
+	\definecolor{rptu2}{named}{rptublaugrau}
+	\definecolor{rptu1}{named}{rptugruengrau}
+}
+\DeclareOptionBeamer{dunkelblau}{
+	\definecolor{rptu1}{named}{rptudunkelblau}
+	\definecolor{rptu2}{named}{rptuhellblau}
+}
+\DeclareOptionBeamer{hellblau}{
+	\definecolor{rptu2}{named}{rptudunkelblau}
+	\definecolor{rptu1}{named}{rptuhellblau}
+}
+\DeclareOptionBeamer{dunkelgruen}{
+	\definecolor{rptu1}{named}{rptudunkelgruen}
+	\definecolor{rptu2}{named}{rptuhellgruen}
+}
+\DeclareOptionBeamer{hellgruen}{
+	\definecolor{rptu2}{named}{rptudunkelgruen}
+	\definecolor{rptu1}{named}{rptuhellgruen}
+}
+\DeclareOptionBeamer{rot}{
+	\definecolor{rptu1}{named}{rpturot}
+	\definecolor{rptu2}{named}{rptuorange}
+}
+\DeclareOptionBeamer{orange}{
+	\definecolor{rptu2}{named}{rpturot}
+	\definecolor{rptu1}{named}{rptuorange}
+}
+\DeclareOptionBeamer{violett}{
+	\definecolor{rptu1}{named}{rptuviolett}
+	\definecolor{rptu2}{named}{rptupink}
+}
+\DeclareOptionBeamer{pink}{
+	\definecolor{rptu2}{named}{rptuviolett}
+	\definecolor{rptu1}{named}{rptupink}
+}
+
+% 3. Option: Navigation
+\newif\ifRPTU@displayNavigation%
+\DeclareOptionBeamer{navigation}[false]{\csname RPTU@displayNavigation#1\endcsname}
+% alternating commands
+\DeclareOptionBeamer{displaynavigation}{%
+	\RPTU@displayNavigationtrue}
+\DeclareOptionBeamer{hidenavigation}{%
+	\RPTU@displayNavigationfalse}
+	
+% 4. Navigation based on minipage gets option compress
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+
+% 5. Option: Show Institute in Footline
+\newif\ifRPTU@displayInstitute%
+\DeclareOptionBeamer{institute}[true]{\csname RPTU@displayInstitute#1\endcsname}
+% alternate commands
+\DeclareOptionBeamer{displayinstitute}{%
+	\RPTU@displayInstitutetrue}
+\DeclareOptionBeamer{hideinstitute}{%
+	\RPTU@displayInstitutefalse}
+	
+\ProcessOptionsBeamer
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Load Theme                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\useinnertheme{rptu}
+\useoutertheme{rptu}
+\usecolortheme{rptu}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Other Settings                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{colorlinks,linkcolor=,urlcolor=rptuhellblau}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  Itemize/Enumerate/Blocks                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{section in toc}[square]
+\setbeamertemplate{subsection in toc}[square]
+
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize subitems}[triangle]
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=false]  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Create a Section Page                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{section title}{size=\Large, series=\bfseries}
+
+\newcommand*{\rptusectionpage}{
+\begingroup
+	\setbeamertemplate{background}{
+	\begin{tikzpicture}
+  		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  		\fill[color=rptu1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  	\end{tikzpicture}
+  	}
+\setbeamertemplate{section page}{
+\vskip0.75cm
+\begin{beamercolorbox}[wd=11cm, leftskip=1cm]{section title}
+\parbox{2cm}{{\bfseries\fontsize{132}{148}\selectfont\two@digits\thesection}}%
+\hspace{0.5cm}%
+\parbox{7cm}{\usebeamerfont{section title}\insertsectionhead}
+	\end{beamercolorbox}%
+}
+\frame[plain]{\sectionpage}
+\endgroup
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Provide Commands to Excludes Frames from Navigation    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%https://tex.stackexchange.com/questions/37127/how-to-remove-some-pages-from-the-navigation-bullets-in-beamer/45038#45038
+
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\navigationinclude}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\navigationexclude}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+
+\mode<all>

@@ -1,0 +1,52 @@
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Background                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% only specify non white background for title page
+\setbeamertemplate{background}{
+\ifnum \thepage=1%
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \fill[color=rptu1] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+  \node[inner sep=0pt] at (10.75,1.5)
+    {\includegraphics[width=.25\textwidth]{logos/RPTU_Logo_default_weiss.png}};
+  \end{tikzpicture}
+  \else%
+  \fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Title Page                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{title page}{RPTU}[1][]{ 
+   \vskip3cm%
+    \begin{beamercolorbox}[wd=10cm,sep=0pt,#1]{title page header}
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+    \vskip0.25cm%
+    \textcolor{rptu2}{\rule{1cm}{1pt}}%
+    \vskip0.25cm%
+     \begin{beamercolorbox}[wd=10cm,#1]{author}
+      \usebeamerfont{subtitle}\insertsubtitle%
+    \end{beamercolorbox}
+    \vskip2cm%
+    \begin{beamercolorbox}[wd=7cm,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}
+    \ifx \insertinstitute\@empty%
+    \else
+    \begin{beamercolorbox}[wd=7cm,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute%
+    \end{beamercolorbox}
+    \fi
+     \vskip0.3cm%
+    \begin{beamercolorbox}[wd=7cm,#1]{date}
+      \usebeamerfont{date}\insertdate%
+    \end{beamercolorbox}
+  \vfill
+}
+
+\mode<all>

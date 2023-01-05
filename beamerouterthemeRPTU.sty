@@ -1,0 +1,114 @@
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           Fonts                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{subtitle}{parent={normal text}, size=\small, series=\mdseries}
+\setbeamerfont{author}{size=\small, series=\mdseries}
+\setbeamerfont{date}{size=\small, series=\mdseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{framesubtitle}{parent={normal text}, series=\mdseries}
+\setbeamerfont{title in head/foot}{parent={footline}}
+\setbeamerfont{author in head/foot}{parent={footline}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Frame Title                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{frametitle}{RPTU}[1][]{
+	\ifRPTU@displayNavigation%
+		\vskip3ex
+	\fi
+	\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm]{frametitle}
+		\vskip2ex
+  		\usebeamerfont{frametitle}\insertframetitle
+  		% check if subtitle exists
+		\ifx\insertframesubtitle\@empty%
+		\else%
+			\vskip0pt%
+			\usebeamerfont{framesubtitle}\insertframesubtitle
+		\fi%
+		\vskip0pt%
+		\textcolor{rptu2}{\rule{1cm}{1pt}} % add light separation line
+	\end{beamercolorbox}%t
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Footline                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Logo for footer
+\def\logo{%
+\resizebox{!}{2ex}{\includegraphics{logos/RPTU_Logo_kurz.png}}}
+
+% Footline
+\defbeamertemplate*{footline}{RPTU}[1][]{
+% \vskip9ex is a hack when having footnotes
+% otherwise frame content 
+\vskip9ex
+\ifnum\c@framenumber>1%
+	\begin{beamercolorbox}[wd=\paperwidth, ht=0.09\paperheight, leftskip=0.5cm, 
+						   rightskip =0.5cm]{footline} 
+		\vspace{12ex}%
+		\ifRPTU@displayTotalFrameNumber%
+			\parbox{0.07\linewidth}{ \usebeamerfont{footline}\raggedright%
+				\insertframenumber/\inserttotalframenumber}% 
+		\else 
+			\parbox{0.04\linewidth}{ \usebeamerfont{footline}\raggedright%
+		\insertframenumber
+		}%
+		\fi
+ 		\parbox{0.8\linewidth}{
+ 			\textcolor{rptu2}{\rule[-1pt]{1pt}{6pt}}
+ 			\hspace*{0.5em}%
+  			\usebeamerfont{footline}\insertshortauthor
+  			\hspace*{0.5em}%
+  			\textcolor{rptu2}{\rule[-1pt]{1pt}{6pt}}
+  			\ifRPTU@displayInstitute%
+  				\hspace*{0.5em}%
+  				\usebeamerfont{footline}\insertshortinstitute
+  				\hspace*{0.5em}%
+  				\textcolor{rptu2}{\rule[-1pt]{1pt}{6pt}}
+  			\fi%
+  			\hspace*{0.5em}%
+  			\usebeamerfont{title in head/foot}\insertshorttitle
+ 		}%
+ 		\hfill%
+ 		\parbox{0.05\linewidth}{
+ 		\logo
+ 		}%
+ 	\end{beamercolorbox}
+\fi%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Headline                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\newlength{\headlineheight}
+\setlength{\headlineheight}{0.09\paperheight}
+\defbeamertemplate*{headline}{RPTU}{
+\ifnum\c@framenumber>1%
+	\ifRPTU@displayNavigation%
+		\begin{beamercolorbox}[wd=0.9\paperwidth, ht=\headlineheight, 
+							   leftskip=0.25cm, rightskip =0.25cm]{navigation}
+			\insertnavigation{0.9\paperwidth}{}{\hskip0pt plus1fill}
+		\end{beamercolorbox}
+	\fi%
+\fi%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Footnotes                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{footnote}{%
+% change left margin compared to default
+   \makebox[0.8em][l]{\scriptsize\insertfootnotemark}\scriptsize\insertfootnotetext\par%
+}
+
+\mode<all>
+
+
