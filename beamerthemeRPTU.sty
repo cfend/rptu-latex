@@ -5,8 +5,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 1. Include Other Logos (maybe wait for Logo-Generator)? 
-% 2. Department Name on Slides?
-% 3. Include Option for Navigation?
 %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,21 +104,49 @@
 \DeclareOptionBeamer{hideinstitute}{%
 	\RPTU@displayInstitutefalse}
 	
+% 6. Option to use Red Hat Text Font
+\newif\ifRPTU@useredhattext%
+\DeclareOptionBeamer{redhattext}[false]{\csname RPTU@useredhattext#1\endcsname}
+
+
+% 7. PartnerLogo
+\newif\ifRPTU@useownlogo%
+\DeclareOptionBeamer{ownlogo}[false]{\csname RPTU@useownlogo#1\endcsname}
+\newcommand{\ownlogo}{}
+
 \ProcessOptionsBeamer
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Set Font Family                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% as explained in metropolixtheme.pdf (Page 33-35)
+% https://tug.org/docs/latex/beamertheme-metropolis/metropolistheme.pdf
+
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+
+\ifRPTU@useredhattext%
+	\ifboolexpr{bool {xetex} or bool {luatex}}{%
+		\@ifpackageloaded{fontspec}{%
+		 	\PaddOptionsToPackage{no-math}{fontspec}%
+		}{%
+		   \RequirePackage[no-math]{fontspec}%
+		}%
+	\setsansfont[ItalicFont={Red Hat Text Italic},%
+		     BoldFont = {Red Hat Text Semi Bold},%
+		     BoldItalicFont = {Red Hat Text Semi Bold Italic}]{Red Hat Text}%
+	}%
+\fi%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                         Load Theme                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\useinnertheme{rptu}
-\useoutertheme{rptu}
-\usecolortheme{rptu}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                       Other Settings                        %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\hypersetup{colorlinks,linkcolor=,urlcolor=rptuhellblau}
+\useinnertheme{rptu} %title page
+\useoutertheme{rptu} %fonts, header, footer, frame title 
+\usecolortheme{rptu} %color scheme
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  Itemize/Enumerate/Blocks                   %
@@ -150,12 +176,25 @@
   	\end{tikzpicture}
   	}
 \setbeamertemplate{section page}{
-\vskip0.75cm
-\begin{beamercolorbox}[wd=11cm, leftskip=1cm]{section title}
-\parbox{2cm}{{\bfseries\fontsize{132}{148}\selectfont\two@digits\thesection}}%
-\hspace{0.5cm}%
-\parbox{7cm}{\usebeamerfont{section title}\insertsectionhead}
-	\end{beamercolorbox}%
+ 		\begin{minipage}{0.3\paperwidth}
+                       \begin{flushright} 
+  			\usebeamercolor[fg]{section title}%
+			\usebeamerfont{section title}%
+                      {\bfseries\fontsize{128}{132}\selectfont\thesection}
+			\end{flushright}
+              \end{minipage}%
+	     \hspace*{0.05\paperwidth}
+	      \begin{minipage}{0.5\paperwidth}
+                       \begin{flushleft} 
+  		       \usebeamercolor[fg]{section title}%
+                       \usebeamerfont{section title}\insertsectionhead\vskip0pt%
+                       \ifx\insertsubsectionhead\@empty\else%
+                         \usebeamercolor[fg]{subsection title}%
+                         \usebeamerfont{subsection title}%
+                         \insertsubsectionhead
+                       \fi
+			\end{flushleft}
+                     \end{minipage}
 }
 \frame[plain]{\sectionpage}
 \endgroup
@@ -164,10 +203,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %      Provide Commands to Excludes Frames from Navigation    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %https://tex.stackexchange.com/questions/37127/how-to-remove-some-pages-from-the-navigation-bullets-in-beamer/45038#45038
 
-\makeatletter
+
 \let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
 \def\beamer@writeslidentry@miniframesoff{%
   \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
@@ -178,6 +216,21 @@
 }
 \newcommand*{\navigationinclude}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
 \newcommand*{\navigationexclude}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
-\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     RPTU Design Color Box                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% by Raul
+
+\RequirePackage{tcolorbox}
+
+\newtcolorbox{rptu-twocolors}{colback=white!60!rptu2, colframe=rptu1, 
+	             sharp corners, rounded corners = southeast,
+		     arc=10mm}
+
+\newtcolorbox{rptu-onecolor}{colback=rptu1, colframe=rptu1, coltext=rptuweiss,
+	             sharp corners, rounded corners = southeast,
+		     arc=10mm}
 
 \mode<all>

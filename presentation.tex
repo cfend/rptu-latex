@@ -1,13 +1,17 @@
-\documentclass{beamer}
+\documentclass[]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-\usetheme[dunkelblau,
-		  displaynavigation,compress,
-		  displayinstitute,           
+\usetheme[dunkelgruen,
+		  redhattext=true,
+		  %displaynavigation,compress,
+		  displayinstitute,  
+		  ownlogo=false,         
 		  displayframetotal]{rptu}
 % Available options:
 % See below for available options
+
+\usepackage{lipsum}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  Main Configuration                   %
@@ -15,9 +19,13 @@
 
 \title[RPTU \LaTeX\ Presentation]{A first RPTU \LaTeX\ Presentation}
 \subtitle{with the new RPTU Kaiserslautern-Landau Corporate Design}
-\date{Kaiserslautern, January 4th, 2023}
+\date{Kaiserslautern, \today}
 \author[Mustermann]{Dr. Max Mustermann}
 \institute[Mathematik]{AG Statistik, FB Mathematik}
+
+\renewcommand{\ownlogo}{}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                    Begin Content                      %
@@ -49,7 +57,7 @@
 	\end{tabular}
 	\vspace*{2ex}
 	
-	Defaults are the description written in \textbf{bold}.
+	Defaults are the descriptions written in \textbf{bold}.
 \end{frame}
 
 \begin{frame}{Available options~II}
@@ -62,28 +70,38 @@
 		\texttt{compress} & equivalent to beamer's compress \\ \hline
 		\texttt{institute=true|false} &Show|\textbf{Hide} short institute in footline \\
 		\texttt{displayinstitute} & Show short institute in footline \\ 
-		\texttt{hideinstitute} & Hide short institute in footline \\ 
+		\texttt{hideinstitute} & Hide short institute in footline \\ \hline
+		\texttt{redhattext=true|false} & Use|\textbf{Do not use} the Red Hat Text Font \\ & (only tested with LuaLaTeX) \\ \hline
+		\texttt{ownlogo=true|false} & Use|\textbf{Do not use} a user specified logo \\ & (instead of default)
 	\end{tabular}
 	\vspace*{2ex}
 	
-	Defaults are the description written in \textbf{bold}.
+	Defaults are the descriptions written in \textbf{bold}.
 \end{frame}
 
-\begin{frame}{Option Part 2}
+\begin{frame}{Options}{Some Remarks}
 \begin{itemize}
 	\item When using \texttt{navigation=true} you should use the option \texttt{compress} to obtain a single line for the navigation symbols. Otherwise each subsection has its own line. The complete navigation might not fit on the slide.
 	\item If \texttt{institute=true} the \texttt{\textbackslash institute} is used to set the name of department/institute/affiliation both in the footline and on the title page:	
-	\begin{equation*}
+	
 		\texttt{\textbackslash institute[name in footline]\{name on title page\}}
-	\end{equation*}  
+	 
 	\item This presentation uses the options \texttt{dunkelblau},
 		  \texttt{displayinstitute}, \texttt{displaynavigation},
 		  \texttt{compress},
           \texttt{displayframetotal}
+        \item Use \texttt{\textbackslash documentclass[aspectratio=169]\{beamer\}} for getting a 16:9 aspect ratio instead of 4:3
 \end{itemize}
-		
 	\end{frame}
 
+
+\begin{frame}{Using Red Hat Text}
+	\begin{itemize}
+		\item Make sure that the 'static' versions of the font are installed on your computer
+		\item We use \texttt{RedHatText-Regular}, \texttt{RedHatText-Italic}, \texttt{RedHatText-SemiBold}, \texttt{RedHatText-SemiBoldItalic}. The corresponding individual \texttt{.ttf} files need to be available.
+		\item Use LuaLaTex or Xetex, otherwise the default font is used instead of Red Hat Text
+	\end{itemize}
+\end{frame}
 
 \section{Elements of a Frame}
 \rptusectionpage
@@ -137,6 +155,16 @@ Sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 \end{columns}
 \end{frame}
 
+\begin{frame}{A RPTU Design Box}
+\begin{rptu-twocolors}
+\texttt{\textbackslash begin\{rptu-twocolors\} \\ text \\ \textbackslash end\{rptu-twocolors\}}
+\end{rptu-twocolors}
+	
+	\begin{rptu-onecolor}
+		\texttt{\textbackslash begin\{rptu-onecolor\} \\ text \\ \textbackslash end\{rptu-onecolor\}}
+	\end{rptu-onecolor}
+\end{frame}
+
 \subsection{Footnotes}
 
 \begin{frame}{Footnotes}
@@ -156,32 +184,6 @@ Sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
 \begin{frame}
 A frame without a title but not plain	
-\end{frame}
-
-\navigationexclude
-\begin{frame}
-	This frame is not taken into account for the navigation.
-	
-	We used \texttt{\textbackslash navigationexclude} before this slide.
-\end{frame}
-
-\begin{frame}
-	Neither is this one.
-\end{frame}
-
-\begin{frame}
-	Or this.
-\end{frame}
-
-\begin{frame}
-	Or this.
-\end{frame}
-
-\navigationinclude
-\begin{frame}
-	But this frame is in the navigation again.
-	
-	We used \texttt{\textbackslash navigationinclude} before this slide.
 \end{frame}
 
 \subsection{Lists}
@@ -230,6 +232,8 @@ number not in the first $p$ numbers.
 
 
 \section{Images and Figures}
+\subsection*{and the current subsection}
+
 \rptusectionpage
 
 \begin{frame}{Include Images}
@@ -255,6 +259,72 @@ number not in the first $p$ numbers.
 	\end{columns}
 
 \vspace{1em}
+\end{frame}
+
+
+\begin{frame}{Include Images}{Two rows of images}
+	\begin{columns}
+	\begin{column}{0.3\textwidth}
+		\begin{figure}
+			\includegraphics[width=\linewidth]{example-image-a}
+			\includegraphics[width=\linewidth]{example-image-a}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.3\textwidth}
+		\begin{figure}
+			\includegraphics[width=\linewidth]{example-image-b}
+			\includegraphics[width=\linewidth]{example-image-a}
+		\end{figure}
+	\end{column}
+	\begin{column}{0.3\textwidth}
+		\begin{figure}
+			\includegraphics[width=\linewidth]{example-image-b}
+			\includegraphics[width=\linewidth]{example-image-a}
+		\end{figure}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+
+\section{Other Macros}
+\subsection*{and another subsection name}
+\rptusectionpage
+
+\begin{frame}
+	\begin{itemize}
+		\item Exclude certain slides from the navigation bar (if it is shown)
+	\end{itemize}
+\end{frame}
+
+\navigationexclude
+\begin{frame}
+	This frame is not taken into account for the navigation.
+	
+	We used \texttt{\textbackslash navigationexclude} before this slide.
+\end{frame}
+
+\begin{frame}
+	Neither is this one.
+\end{frame}
+
+\begin{frame}
+	Or this.
+\end{frame}
+
+\navigationinclude
+\begin{frame}
+	But this frame is in the navigation again.
+	
+	We used \texttt{\textbackslash navigationinclude} before this slide.
+\end{frame}
+
+\begin{frame}
+\vspace*{\baselineskip}
+\lipsum[2-3][1-20]
+ 
+And one more line.
+	
+And another one.
 \end{frame}
 
 \end{document}

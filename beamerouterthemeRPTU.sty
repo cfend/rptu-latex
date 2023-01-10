@@ -19,10 +19,10 @@
 
 \defbeamertemplate*{frametitle}{RPTU}[1][]{
 	\ifRPTU@displayNavigation%
-		\vskip3ex
+		\vskip1ex%
 	\fi
-	\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.5cm]{frametitle}
-		\vskip2ex
+	\vspace*{\baselineskip}%
+	\begin{beamercolorbox}[wd=\paperwidth,leftskip=0.25cm]{frametitle}
   		\usebeamerfont{frametitle}\insertframetitle
   		% check if subtitle exists
 		\ifx\insertframesubtitle\@empty%
@@ -31,7 +31,7 @@
 			\usebeamerfont{framesubtitle}\insertframesubtitle
 		\fi%
 		\vskip0pt%
-		\textcolor{rptu2}{\rule{1cm}{1pt}} % add light separation line
+		\textcolor{rptu2}{\rule[1ex]{1cm}{1pt}} % add light separation line
 	\end{beamercolorbox}%t
 }
 
@@ -45,13 +45,13 @@
 
 % Footline
 \defbeamertemplate*{footline}{RPTU}[1][]{
-% \vskip9ex is a hack when having footnotes
+% \vskip7ex is a hack when having footnotes
 % otherwise frame content 
-\vskip9ex
+\vskip4ex
 \ifnum\c@framenumber>1%
-	\begin{beamercolorbox}[wd=\paperwidth, ht=0.09\paperheight, leftskip=0.5cm, 
-						   rightskip =0.5cm]{footline} 
-		\vspace{12ex}%
+	\begin{beamercolorbox}[wd=\paperwidth, ht=0.08\paperheight, leftskip=0.25cm, 
+						   rightskip =0.25cm]{footline} 
+		\vspace{8ex}%
 		\ifRPTU@displayTotalFrameNumber%
 			\parbox{0.07\linewidth}{ \usebeamerfont{footline}\raggedright%
 				\insertframenumber/\inserttotalframenumber}% 
@@ -73,7 +73,7 @@
   				\textcolor{rptu2}{\rule[-1pt]{1pt}{6pt}}
   			\fi%
   			\hspace*{0.5em}%
-  			\usebeamerfont{title in head/foot}\insertshorttitle
+  			\usebeamerfont{title in head/foot}\let\hyperlink\@secondoftwo\insertshorttitle%  %no link for title in footline
  		}%
  		\hfill%
  		\parbox{0.05\linewidth}{
@@ -88,13 +88,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 \newlength{\headlineheight}
-\setlength{\headlineheight}{0.09\paperheight}
+\setlength{\headlineheight}{0.06\paperheight}
 \defbeamertemplate*{headline}{RPTU}{
 \ifnum\c@framenumber>1%
 	\ifRPTU@displayNavigation%
-		\begin{beamercolorbox}[wd=0.9\paperwidth, ht=\headlineheight, 
-							   leftskip=0.25cm, rightskip =0.25cm]{navigation}
-			\insertnavigation{0.9\paperwidth}{}{\hskip0pt plus1fill}
+		\begin{beamercolorbox}[wd=\paperwidth, ht=\headlineheight]{section in head/foot}
+			\insertnavigation{\paperwidth}\vskip0pt%
 		\end{beamercolorbox}
 	\fi%
 \fi%
@@ -106,7 +105,7 @@
 
 \setbeamertemplate{footnote}{%
 % change left margin compared to default
-   \makebox[0.8em][l]{\scriptsize\insertfootnotemark}\scriptsize\insertfootnotetext\par%
+   \makebox[0.5em][l]{\scriptsize\insertfootnotemark}\scriptsize\insertfootnotetext\par%
 }
 
 \mode<all>

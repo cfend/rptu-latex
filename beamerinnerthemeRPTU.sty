@@ -6,14 +6,22 @@
 
 % only specify non white background for title page
 \setbeamertemplate{background}{
-\ifnum \thepage=1%
-  \begin{tikzpicture}
-  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-  \fill[color=rptu1] (0,0) rectangle (\the\paperwidth,\the\paperheight);
-  \node[inner sep=0pt] at (10.75,1.5)
-    {\includegraphics[width=.25\textwidth]{logos/RPTU_Logo_default_weiss.png}};
-  \end{tikzpicture}
-  \else%
+\ifnum\c@framenumber=1%
+	\ifRPTU@useownlogo%
+		\begin{tikzpicture}
+  			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  			\fill[color=rptu1] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+  			\node[inner sep=20pt] at (current bounding box.south east) [anchor=south east]
+    				{\ownlogo};
+  		\end{tikzpicture}
+	\else%
+ 		\begin{tikzpicture}
+  			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  			\fill[color=rptu1] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+  			\node[inner sep=20pt] at (current bounding box.south east) [anchor=south east]
+    				{\includegraphics[width=.2\paperwidth]{logos/RPTU_Logo_default_weiss.png}};
+  		\end{tikzpicture}
+	\fi%
   \fi
 }
 
@@ -23,30 +31,29 @@
 
 \defbeamertemplate*{title page}{RPTU}[1][]{ 
    \vskip3cm%
-    \begin{beamercolorbox}[wd=10cm,sep=0pt,#1]{title page header}
+    \begin{beamercolorbox}[wd=0.7\paperwidth, sep=0pt,#1]{title page header}
       \usebeamerfont{title}\inserttitle\par%
     \end{beamercolorbox}%
-    \vskip0.25cm%
-    \textcolor{rptu2}{\rule{1cm}{1pt}}%
-    \vskip0.25cm%
-     \begin{beamercolorbox}[wd=10cm,#1]{author}
+    \vskip1ex%
+    \textcolor{rptu2}{\rule[1ex]{1cm}{1pt}}%
+    \vskip0pt%
+     \begin{beamercolorbox}[wd=0.7\paperwidth,#1]{subtitle}
       \usebeamerfont{subtitle}\insertsubtitle%
     \end{beamercolorbox}
-    \vskip2cm%
-    \begin{beamercolorbox}[wd=7cm,#1]{author}
+    \vskip8ex%
+    \begin{beamercolorbox}[wd=0.5\paperwidth,#1]{author}
       \usebeamerfont{author}\insertauthor%
     \end{beamercolorbox}
     \ifx \insertinstitute\@empty%
     \else
-    \begin{beamercolorbox}[wd=7cm,#1]{institute}
+    \begin{beamercolorbox}[wd=0.5\paperwidth,#1]{institute}
       \usebeamerfont{institute}\insertinstitute%
     \end{beamercolorbox}
     \fi
-     \vskip0.3cm%
-    \begin{beamercolorbox}[wd=7cm,#1]{date}
+     \vskip2ex%
+    \begin{beamercolorbox}[wd=0.5\paperwidth,#1]{date}
       \usebeamerfont{date}\insertdate%
     \end{beamercolorbox}
-  \vfill
 }
 
 \mode<all>
