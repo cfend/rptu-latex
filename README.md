@@ -20,6 +20,8 @@ A minimal presentation without navigation bar and with main color **RPTU dunkelb
 \author[Short Name]{Full Name}
 \institute[Short Institute]{Full Affiliation}
 
+\renewcommand{\ownlogo}{} % in case of own logo insert here
+
 \begin{document}
 \begin{frame}
 \titlepage
@@ -54,6 +56,8 @@ A non plain frame with title.
           %hideinstitute, institute=false,
           displaynavigation, %navigation=true,
           %hidenavigation, navigation=false,
+          redhattext = false, %redhattext = true,
+          ownlogo = false, %ownlogo = true,
           compress]{rptu}
 ```
 
@@ -66,13 +70,22 @@ A non plain frame with title.
 | hidenavigation, navigation=false| Do not include any navigation |
 | displayinstitute, institute=true | Show the short institute/affiliation name in the footline|
 | hideinstitute, institute=false| Do not include the institute in the footline |
-|compress| Same as beamer's compress, e.g. one-line navigation mini-frames|
+| compress| Same as beamer's compress, e.g. one-line navigation mini-frames|
+| redhattext = true| Use RedHatText as font, needs XeTeX or LuaLaTex|
+| redhattext = false| default |
+| ownlogo = true| Replace the default RPTU logo with one from th logo generator |
+| ownlogo = false| default |
 
+## Notes
+
+If you want to use Red Hat Text, make sure that the static versions of the font are installed on your system. Since we use the package fontspec you cannot compile with pdflatex.
 
 ## TODOs
 
-- [ ] Include RPTU-Hausschrift Red Hat Text (as option if it is installed)
+- [ ] Set default Logo and short logo in footline as SVG such that no logos are needed
+- [ ] Include Red Hat Mono font
+- [ ] Replacement font Arial as first substitute if Red Hat Text not available
 - [ ] Fix displaynavigation when not using compress (-> positioning of multiline navigation dots)
-- [ ] Option to change the logo or add a second logo
-- [ ] Add navigation bar options to only show the sectionnames
-- [ ] Define the color palettes correctly
+- [ ] Add navigation bar option to only show the sectionnames instead of miniframes
+- [ ] some bugs with geometry setup, check the margins for correct positioning
+- [ ] Random color option
