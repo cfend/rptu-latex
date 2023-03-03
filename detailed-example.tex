@@ -1,0 +1,54 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[T1]{fontenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     STYLE OPTIONS                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetheme[dunkelblau,
+		  redhattext=true,
+		  %displaynavigation,compress,
+		  %displayinstitute,  
+		  %ownlogo=true,   
+		  %sponsorlogo=true,      
+		  displayframetotal
+		  ]{rptu}
+		  
+% Read the README, some options need specific compiler
+% options, installing the Red Hat Text font has some pitfalls
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        META DATA                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[RPTU \LaTeX\ Presentation]{A first RPTU \LaTeX\ Presentation\\ A more detailed example}
+\subtitle{with the new RPTU Kaiserslautern-Landau Corporate Design}
+\date{Kaiserslautern, \today}
+\author[Mustermann]{Dr. Max Mustermann}
+\institute[Mathematik]{AG Statistik, FB Mathematik}
+
+% fill this command and set ownlogo=true in \usetheme 
+% make sure to specify the width/height in \includegraphics
+% this will override the default RPTU on the title page
+\renewcommand{\ownlogo}{}
+
+% fill this command and set sponsorlogo=true in \usetheme 
+% make sure to specify the width/height in \includegraphics
+% this will be placed in the upper right corner of the slide
+\renewcommand{\sponsorlogo}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           PUT ALL ADDITIONAL PACKAGES HERE            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lipsum} % only needed for the example slides
+\usepackage{booktabs} % nicer tables
+\usepackage{metalogo} % XeLaTeX logo
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                CONTENT OF PRESENTATION                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\input{some-content}
+\end{document}

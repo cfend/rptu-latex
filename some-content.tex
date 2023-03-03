@@ -1,0 +1,339 @@
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}[minimal, highlight1]{Agenda}
+	\tableofcontents
+\end{frame}
+
+\section{Theme Options}
+\rptusectionpage
+
+\begin{frame}{Available options~I - Colors and RPTU Hausschrift (Red Hat Text)}
+	\framesubtitle{\texttt{\textbackslash usetheme[options]\{rptu\}}}
+	\begin{tabular}{ll}
+		\textbf{Option} & \textbf{Description}\\ \toprule
+		\texttt{dunkelblau|hellblau} & Set color scheme of presentation\\
+		\texttt{rot|orange} & (\textbf{dunkelblau} is default)\\
+		\texttt{dunkelgruen|hellgruen} & Each line defines a colorscheme,\\
+		\texttt{blaugrau|gruengrau} & you specify the main color and the\\ 
+		\texttt{violett|pink} & secondary color is set automatically\\ \midrule		\texttt{redhattext=true|false} & Use/\textbf{Do not use} the Red Hat Text Font \\ & needs specific compilers $\Rightarrow$ read remarks (Slide~\pageref{remarks-font}) \\\bottomrule
+	\end{tabular}
+	\vspace*{2ex}
+	
+	Defaults are the descriptions written in \textbf{bold}.
+\end{frame}
+
+
+\begin{frame}[minimal]{Using Red Hat Text}
+	\label{remarks-font}
+	\begin{itemize}
+		\item Make sure that the static versions of the font are installed on your computer
+		\item We use the following \texttt{.ttf} files \begin{itemize}
+			\item RedHatText-Regular as normal text
+			\item RedHatText-Italic as \textit{italic} \texttt{\textbackslash textit}
+			\item RedHatText-SemiBold as \textbf{bold} \texttt{\textbackslash textbf}
+			\item RedHatText-SemiBoldItalic for \textbf{\textit{bold and italic}}
+			\item RedHatText-Bold for {\fontseries{k}\selectfont title and the sectionpage}, can be accessed with \texttt{\textbackslash fontseries\{k\}\textbackslash selectfont} 
+		\end{itemize}
+		\item We use the package \texttt{fontspec} for setting this font $\Rightarrow$ you need to compile with \XeLaTeX\ (XeLaTeX) or Lua\LaTeX\ (LuaLaTeX) if you want to use Red Hat Text
+		\item If you use \XeLaTeX\ or Lua\LaTeX\ with the option \texttt{redhattext=false} then Arial is set as main font family with Arial Black as substitute for {\fontseries{k}\selectfont RedHatText-Bold} (you need to install Arial/Arial Black manually under Ubuntu in that case)
+		\item With pdfLaTeX the main font family is Computer Modern (\LaTeX\ default)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Available options~II - Logos}
+	\framesubtitle{\texttt{\textbackslash usetheme[options]\{rptu\}}}
+	\begin{tabular}{ll}
+		\textbf{Option} & \textbf{Description}\\ \toprule
+		\texttt{ownlogo=true|false} & Use/\textbf{Do not use} a user specified logo \\ 
+		& (instead of default RPTU logo) \\
+		\texttt{sponsorlogo=true|false} & Use/\textbf{Do not use} a user specified sponsor logo \\ & (placed in upper right corner) \\\bottomrule
+	\end{tabular}
+	\vspace*{2ex}
+	
+	Defaults are the descriptions written in \textbf{bold}.\\ In both cases you need to specify the exact image with dimensions by filling 
+	\begin{itemize}
+		\item \texttt{\textbackslash renewcommand{\textbackslash ownlogo}\{\}} \hspace{1em}$\Rightarrow$\hspace{1em} image A on the title page
+		\item \texttt{\textbackslash renewcommand{\textbackslash sponsorlogo}\{\}}  \hspace{1em}$\Rightarrow$\hspace{1em} image B on the title page
+	\end{itemize}
+	with e.g. \texttt{\textbackslash includegraphics[width=3cm]\{your\_file.png\}}
+\end{frame}
+
+\begin{frame}{Available options~III - Footline}
+	\framesubtitle{\texttt{\textbackslash usetheme[options]\{rptu\}}}
+	\begin{tabular}{ll}
+		\textbf{Option} & \textbf{Description}\\ \toprule
+		\texttt{institute=true|false} &Show/\textbf{Hide} short institute in footline \\
+		\texttt{displayinstitute} & Show short institute in footline \\ 
+		\texttt{hideinstitute} & Hide short institute in footline \\ \midrule
+		\texttt{frametotal=true|false} &Show/\textbf{Hide} total number of slides in footline\\
+		\texttt{displayframetotal} & Show total number of slide in footline\\ 
+		\texttt{hideframetotal} & Hide total number of slide in footline\\  \bottomrule
+	\end{tabular}
+	\vspace*{2ex}
+	
+	Defaults are the descriptions written in \textbf{bold}.
+	
+	This version uses the option \texttt{displayframetotal} but the default regarding the institute in the footline. \end{frame}
+
+\begin{frame}{Available options~IV - Navigation}
+	\framesubtitle{\texttt{\textbackslash usetheme[options]\{rptu\}}}
+	\begin{tabular}{ll}
+		\textbf{Option} & \textbf{Description}\\ \toprule
+		\texttt{navigation=true|false} &Show/\textbf{Hide} navigation in headline \\
+		\texttt{displaynavigation} & Show navigation in headline \\ 
+		\texttt{hidenavigation} & Hide navigation in headline \\  \midrule
+		\texttt{compress} & equivalent to beamer's compress \\\bottomrule
+	\end{tabular}
+	\vspace*{2ex}
+	
+	Defaults are the descriptions written in \textbf{bold}. If you do not specify any navigation option, no navigation bar with mini frames will be shown.
+	
+	This presentation uses the defaults, i.e. no navigation bar.
+\end{frame}
+
+
+\begin{frame}{Options}{Some Remarks}
+	\begin{itemize}
+		\item Use \texttt{navigation=true} in combination with the option \texttt{compress} to obtain a single line for the navigation symbols.
+		\item If \texttt{institute=true} the \texttt{\textbackslash institute} is used to set the name of department/institute/affiliation both in the footline and on the title page\\
+		\texttt{\textbackslash institute[name in footline]\{name on title page\}}
+		\item Use \texttt{\textbackslash documentclass[aspectratio=169]\{beamer\}} for getting a 16:9 aspect ratio instead of 4:3
+	\end{itemize}
+\end{frame}
+
+\section{Elements of a Frame}
+\subsection{Blocks}
+\rptusectionpage
+
+\begin{frame}{Blocks}
+	\begin{block}{Basic Block}
+		\texttt{block}: Content is typeset like this
+	\end{block}
+	\begin{alertblock}{Alert Block}
+		\texttt{alertblock} (always in rot/orange): Content is typeset like this
+	\end{alertblock}
+	\begin{exampleblock}{Example Block}
+		\texttt{exampleblock}  (always in dunkelgruen/hellgruen): Content is typeset like this
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}
+	\begin{definition}[Probability Space]
+		A definition goes here.
+	\end{definition}
+	\begin{Theorem}[Bayes' Theorem]
+		We might want to state theorems.
+	\end{Theorem}
+	\begin{Example}
+		Or give examples.
+	\end{Example}
+	\begin{proof}
+		And a proof.
+	\end{proof}
+\end{frame}
+
+\begin{frame}{A RPTU Design Box}
+	These boxes are created with the \texttt{tcolorbox} package and are defined within \texttt{beamerthemeRPTU.sty}.\vspace{1ex}
+	
+	\begin{rptu-twocolors}
+		\texttt{\textbackslash begin\{rptu-twocolors\} \\ text \\ \textbackslash end\{rptu-twocolors\}}
+	\end{rptu-twocolors}
+	
+	\begin{rptu-onecolor}
+		\texttt{\textbackslash begin\{rptu-onecolor\} \\ text \\ \textbackslash end\{rptu-onecolor\}}
+	\end{rptu-onecolor}
+\end{frame}
+
+\subsection{Footnotes}
+\rptusectionpage
+
+\begin{frame}{Footnotes}
+	Sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Sed diam voluptua.\footnote{here goes a footnote} At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\end{frame}
+
+\begin{frame}{Footnotes}
+	\framesubtitle{What happens with mutiple footnotes?}
+	Sed diam voluptua. At vero eos et accusam et justo duo dolores\footnote{some footnote} et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Sed diam voluptua.\footnote{here goes a footnote} At vero eos et accusam et justo duo dolores et ea rebum. 
+	
+	Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\footnote{even a third footnote}
+\end{frame}
+
+
+\subsection{Frame Styles}
+\rptusectionpage 
+
+\begin{frame}[minimal]{A slide of style {\fontseries{k}\selectfont minimal}}
+	You can create a slide like this via 
+	
+	\texttt{\textbackslash begin\{frame\}[minimal]\{A slide of style minimal\}\\ \dots\\ \textbackslash end\{frame\}
+	}
+	
+	Here, only frame number and RPTU logo are shown in the footline.
+\end{frame}
+
+\begin{frame}[minimal, highlight1]{A slide of style {\fontseries{k}\selectfont minimal and highlight1}}
+
+\texttt{\textbackslash begin\{frame\}[minimal]\{A slide of style minimal, highlight1\}\\ \dots \\ \textbackslash end\{frame\}
+	}
+	
+	\vspace{1ex}
+	
+	Here, only frame number and RPTU logo are shown in the footline. \textbf{Highlight1} sets the background color to the main color.
+	\begin{itemize}
+		\item A \begin{itemize}
+			\item A
+			\item B
+		\end{itemize}
+		\item B
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[highlight2]{A slide of style {\fontseries{k}\selectfont highlight2}}
+	\texttt{\textbackslash begin\{frame\}[highlight2]\{A slide of style highlight2\} \\ \dots \\ \textbackslash end\{frame\}
+	}
+	
+	\vspace{1ex}
+	\textbf{Highlight2} sets the background color to the secondary color.
+\end{frame}
+
+\begin{frame}[plain]{A slide of style {\fontseries{k}\selectfont plain}}
+\texttt{\textbackslash begin\{frame\}[plain]\{A slide of plain\} \\ \dots \\\textbackslash end\{frame\}
+	}\vspace{1ex}
+	
+	An example for a \textbf{plain} slide with title, thus no footline, no headline, no navigation (in case that you use the navigation option)
+\end{frame}
+
+\begin{frame}[minimal, black]{If you want a monochrome slide}
+\texttt{\textbackslash begin\{frame\}[minimal, black]\{If you want a monochrome slide\} \\ \dots \\ \textbackslash end\{frame\}
+	}\vspace{1ex}
+	
+	This one uses \texttt{minimal} and \texttt{black}
+\end{frame}
+t
+\begin{frame}{Back to a white slide}
+	Style changes are only changed back to default at the beginning of each standard slide. \texttt{\textbackslash rptusectionpage} does not count as a slide. You should use a non-colored slide before using a sectionpage with a subsection title (as e.g. the next slide) to correctly change the colors. Using minimal or plain is fine.
+\end{frame}
+
+\subsection{Lists}
+% need a slide to refresh to the defaults here
+\rptusectionpage
+
+\begin{frame}{Itemize and Enumerate Environments}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			Some text before the itemize
+			\begin{itemize}
+				\item one \begin{itemize}
+					\item item one one
+					\item item one two \begin{itemize}
+						\item item one one
+						\item item one two
+					\end{itemize}
+				\end{itemize}
+				\item two
+			\end{itemize}
+		Some text after the itemize
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Some text before the enumerate
+			\begin{enumerate}
+				\item one
+				\item two \begin{enumerate}
+					\item enumerate with subitem
+					\item second
+				\end{enumerate}
+			\item and even mixed  \begin{itemize}
+					\item item one one
+					\item item one two
+				\end{itemize}
+			\end{enumerate}
+		Some text after the enumerate
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{Math}
+\rptusectionpage
+
+\begin{frame}[minimal]{Sample of Math Typesetting}
+By default, the beamer template changes the math font to the sans serif font.
+	\begin{align*}
+		\sum_{n=1}^k \frac{1}{n} &\succ \int_1^{k+1} \frac{1}{x}\,  \mathsf{d}x = \ln(k+1) \quad & 
+		\sum_{n = 0}^\infty \frac{(-1)^{n}}{2n+1} &= 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots = \frac{\pi}{4} \\
+		\int_a^b \! f(x)\, \mathsf{d}x &= F(b) - F(a) & 	f'(a)&=\lim_{h\to 0}\frac{f(a+h)-f(a)}{h}\\
+		\begin{bmatrix} 1 & 2\\ 3 & 4\\ \end{bmatrix} \begin{bmatrix} 0 & 1\\ 0 & 0\\ \end{bmatrix} &= \begin{bmatrix} 0 & 1\\ 0 & 3\\ \end{bmatrix} &
+		\textstyle r&=|z|=\sqrt{x^2+y^2}
+	\end{align*}
+	\vspace{1ex}
+	
+	If you want to use a different sans serif or a serif font, you can use 
+
+	\begin{center}
+			\texttt{
+	\textbackslash usepackage\{unicode-math\}\\
+\textbackslash setmathfont\{Latin Modern Math\}}
+	\end{center}
+
+	 in the preamble to specify Latin Modern Math (as a serif font) or any other available font as math font. 
+\end{frame}
+
+
+\section{Images and Figures}
+\subsection*{with \textbackslash subsection* it is possible to add some text here which does not count for the table of contents}
+
+\rptusectionpage
+
+\begin{frame}[minimal, black]{Include Images}
+\framesubtitle{on black background}
+	\begin{columns}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-a}
+				\caption{Image A}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-b}
+				\caption{Image B}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-b}
+				\caption{Image C}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+	\vspace{1em}
+\end{frame}
+
+\begin{frame}[minimal]{Include Images}
+\framesubtitle{on white background}
+	\begin{columns}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-a}
+				\caption{Image A}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-b}
+				\caption{Image B}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\includegraphics[width=\linewidth]{example-image-b}
+				\caption{Image C}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+	\vspace{1em}
+\end{frame}

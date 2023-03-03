@@ -1,0 +1,133 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[T1]{fontenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     STYLE OPTIONS                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usetheme[dunkelblau,
+		  redhattext=true,
+		  displaynavigation,compress,
+		  %displayinstitute,  
+		  %ownlogo=true,  
+		  %sponsorlogo=true,         
+		  %displayframetotal
+		  ]{rptu}
+		  
+% Read the README, some options need specific compiler
+% options, only installing the RedHatText font has some 
+% pitfalls
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        META DATA                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[RPTU \LaTeX\ Presentation]{A first RPTU \LaTeX\ Presentation}
+\subtitle{with a focus on the navigation bar and mini frames}
+\date{Kaiserslautern, \today}
+\author[Last Name]{Firstname Lastname}
+\institute[Short Institute]{Institute}
+
+% fill this command and set ownlogo=true in \usetheme 
+% make sure to specify the width/height in \includegraphics
+% this will override the default RPTU on the title page
+\renewcommand{\ownlogo}{}
+
+% fill this command and set sponsorlogo=true in \usetheme 
+% make sure to specify the width/height in \includegraphics
+% this will be placed in the upper right corner of the slide
+\renewcommand{\sponsorlogo}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                CONTENT OF PRESENTATION                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lipsum} % nicer tables
+
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}[minimal]{Agenda}
+	\tableofcontents
+\end{frame}
+
+\section{Example Navigation Bar}
+\rptusectionpage
+\begin{frame}{Example Slide with Navigation bar}
+	\lipsum[3]
+\end{frame}
+
+
+\section{Options}
+\subsection{Colored Slides}
+\rptusectionpage
+
+\begin{frame}[highlight1]{Main Color}
+	This slide is created as\\
+	\texttt{\textbackslash begin\{frame\}[highlight1]\{Main Color\}
+\textbackslash end\{frame\}	
+}
+\end{frame}
+
+\begin{frame}[highlight2]{Secondary Color}
+	This slide is created as\\
+	\texttt{\textbackslash begin\{frame\}[highlight2]\{ Secondary Color\}
+		\textbackslash end\{frame\}
+	}
+\end{frame}
+
+\begin{frame}[black]{Only Black but all other elements}
+	This slide is created as\\
+	\texttt{\textbackslash begin\{frame\}[black]\{Only Black but all other elements\}
+		\textbackslash end\{frame\}	
+	}
+\end{frame}
+
+\begin{frame}
+	\lipsum[1]
+\end{frame}
+
+\subsection{How to exclude slides}
+\rptusectionpage
+
+\begin{frame}{How to exclude slides}
+	Exclude certain slides from the navigation bar. This slide is still part of the navigation.
+\end{frame}
+
+\navigationexclude
+\begin{frame}{How to exclude slides}
+	This frame is not taken into account for the navigation.
+	
+	We used \texttt{\textbackslash navigationexclude} before this slide.
+\end{frame}
+
+\begin{frame}{How to exclude slides}
+	Neither is this one.
+\end{frame}
+
+\navigationinclude
+\begin{frame}{How to exclude slides}
+	But this frame is in the navigation again.
+	
+	We used \texttt{\textbackslash navigationinclude} before this slide.
+\end{frame}
+
+
+\begin{frame}
+	\lipsum[2]
+\end{frame}
+
+\section{A test section}
+\rptusectionpage
+\begin{frame}
+	\lipsum[5]
+\end{frame}
+
+\begin{frame}
+	\lipsum[6]
+\end{frame}
+
+\end{document}
