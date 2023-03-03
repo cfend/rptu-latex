@@ -1,4 +1,4 @@
-# Unofficial LaTeX Templates following the RPTU Kaiserslauteren-Landau Corporate Design
+# Unofficial LaTeX Templates following the RPTU Kaiserslautern-Landau Corporate Design
 
 Some first LaTeX templates for the new RPTU. Non official and still work in progress.
 
@@ -8,11 +8,14 @@ A minimal presentation without navigation bar and with main color **RPTU dunkelb
 
 ```latex
 \documentclass{beamer}
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 % load RPTU theme with some options
-\usetheme[dunkelblau, displayinstitute, displayframetotal]{rptu}
+\usetheme[dunkelblau,
+		  redhattext=true,
+		  displayinstitute,       
+		  displayframetotal
+		  ]{rptu}
 
 \title[Short Title in Foot]{The complete title for the title page}
 \subtitle{a subtitle for the title page}
@@ -20,6 +23,11 @@ A minimal presentation without navigation bar and with main color **RPTU dunkelb
 \author[Short Name]{Full Name}
 \institute[Short Institute]{Full Affiliation}
 
+% non default logos (optional)
+\renewcommand{\ownlogo}{}  % fill with logo file from logo generator
+\renewcommand{\sponsorlogo}{} % fill with sponsor logos
+
+% content
 \begin{document}
 \begin{frame}
 \titlepage
@@ -48,31 +56,45 @@ A non plain frame with title.
 ```latex
 \usetheme[dunkelblau,
           %hellblau, rot, orange, dunkelgruen, hellgruen, blaugrau, gruengrau, violett, pink,
-          displayframettotal, %frametotal=true,
-          %hideframetotal, frametotal=false,
-          displayinstitute, %institute=true,
-          %hideinstitute, institute=false,
-          displaynavigation, %navigation=true,
-          %hidenavigation, navigation=false,
+          redhattext=false, %redhattext=true,
+          ownlogo=false, %ownlogo=true,
+          sponsorlogo=false, %sponsorlogo=true,
+          frametotal=false, %frametotal=true,
+          %hideframetotal, displayframeetotal
+          institute=false, %institute=true,
+          %hideinstitute, displayinstitute,
+          navigation=false, %navigation=true,
+          %hidenavigation, displaynavigation,
           compress]{rptu}
 ```
 
 | Option | Description |
 | ---------|------------|
 | dunkelblau | Sets the main color of the presentation to **RPTU Dunkelblau**. <br> The options hellblau, rot, orange, dunkelgruen, hellgruen, blaugrau, gruengrau, violett, pink <br> work analogously. |
+| redhattext=true | Use Red Hat Text as main font |
+| redhattext=false | Use Arial (XeLaTeX, LuaLaTeX) or Computer Modern as main font |
+| ownlogo=true | Replace Default RPTU logo with one from the logo generator|
+| ownlogo=false | Keep RPTU default logo |
+| sponsorlogo=true | Place a sponsor logo in upper right corner |
+| sponsorlogo=false | Do not use a sponsor logo|
 | displayframetotal, frametotal=true | Show the slide number as current slidenumber/total slide number|
 | hideframetotal, frametotal=false| Show the slide number as current slidenumber|
-| displaynavigation, navigation=true | Show the navigation in the headline (miniframes layout)|
+| displaynavigation, navigation=true | Show the navigation in the headline (mini frames layout)|
 | hidenavigation, navigation=false| Do not include any navigation |
 | displayinstitute, institute=true | Show the short institute/affiliation name in the footline|
 | hideinstitute, institute=false| Do not include the institute in the footline |
 |compress| Same as beamer's compress, e.g. one-line navigation mini-frames|
 
+## Available Frame Styles
+
+- plain (beamer's plain)
+- minimal: only slide number and short RPTU logo in footline
+- highlight1: background of slide in main color and some color changes for contrast
+- highlight2: background of slide in secondary color (other color of the allowed color combinations) and some color changes for contrast
+- black: background of slide is black, font are in white
 
 ## TODOs
 
-- [ ] Include RPTU-Hausschrift Red Hat Text (as option if it is installed)
-- [ ] Fix displaynavigation when not using compress (-> positioning of multiline navigation dots)
-- [ ] Option to change the logo or add a second logo
-- [ ] Add navigation bar options to only show the sectionnames
-- [ ] Define the color palettes correctly
+- [ ] navigation bar when not using compress (-> positioning of multiline navigation dots, height of headline)
+- [ ] navigation bar option: only sectionnames, no mini frames
+
