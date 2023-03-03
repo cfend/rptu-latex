@@ -83,7 +83,7 @@ A non plain frame with title.
 | hidenavigation, navigation=false| Do not include any navigation |
 | displayinstitute, institute=true | Show the short institute/affiliation name in the footline|
 | hideinstitute, institute=false| Do not include the institute in the footline |
-|compress| Same as beamer's compress, e.g. one-line navigation mini-frames|
+| compress| Same as beamer's compress, e.g. one-line navigation mini-frames|
 
 ## Available Frame Styles
 
@@ -98,3 +98,6 @@ A non plain frame with title.
 - [ ] navigation bar when not using compress (-> positioning of multiline navigation dots, height of headline)
 - [ ] navigation bar option: only sectionnames, no mini frames
 
+## Notes
+
+If you want to use Red Hat Text, make sure that the static versions of the font are installed on your system. Since we use the package fontspec you cannot compile with pdflatex.
