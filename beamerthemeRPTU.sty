@@ -1,11 +1,6 @@
 \RequirePackage{tikz}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                     TODOs for next version                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% 1. Include Other Logos (maybe wait for Logo-Generator)? 
-%
+\usetikzlibrary{svg.path}
+\RequirePackage[utf8]{inputenc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       RPTU Colors                      %
@@ -95,7 +90,7 @@
 % 4. Navigation based on minipage gets option compress
 \DeclareOptionBeamer{compress}{\beamer@compresstrue}
 
-% 5. Option: Show Institute in Footline
+% 5. Option: Show Institute/Affiliation in Footline
 \newif\ifRPTU@displayInstitute%
 \DeclareOptionBeamer{institute}[true]{\csname RPTU@displayInstitute#1\endcsname}
 % alternate commands
@@ -104,15 +99,20 @@
 \DeclareOptionBeamer{hideinstitute}{%
 	\RPTU@displayInstitutefalse}
 	
-% 6. Option to use Red Hat Text Font
+% 6. Option: Red Hat Text Font
 \newif\ifRPTU@useredhattext%
 \DeclareOptionBeamer{redhattext}[false]{\csname RPTU@useredhattext#1\endcsname}
 
 
-% 7. PartnerLogo
+% 7. Option: Own Logo (from logo generator, maybe with partner logos)
 \newif\ifRPTU@useownlogo%
 \DeclareOptionBeamer{ownlogo}[false]{\csname RPTU@useownlogo#1\endcsname}
 \newcommand{\ownlogo}{}
+
+% 8. Option: Own Logo
+\newif\ifRPTU@usesponsorlogo%
+\DeclareOptionBeamer{sponsorlogo}[false]{\csname RPTU@usesponsorlogo#1\endcsname}
+\newcommand{\sponsorlogo}{}
 
 \ProcessOptionsBeamer
 
@@ -123,22 +123,29 @@
 % as explained in metropolixtheme.pdf (Page 33-35)
 % https://tug.org/docs/latex/beamertheme-metropolis/metropolistheme.pdf
 
-\RequirePackage{ifxetex}
-\RequirePackage{ifluatex}
+\RequirePackage{iftex}
 
-\ifRPTU@useredhattext%
-	\ifboolexpr{bool {xetex} or bool {luatex}}{%
-		\@ifpackageloaded{fontspec}{%
-		 	\PaddOptionsToPackage{no-math}{fontspec}%
-		}{%
-		   \RequirePackage[no-math]{fontspec}%
-		}%
-	\setsansfont[ItalicFont={Red Hat Text Italic},%
-		     BoldFont = {Red Hat Text Semi Bold},%
-		     BoldItalicFont = {Red Hat Text Semi Bold Italic}]{Red Hat Text}%
-	}%
+% If we are using XeLaTeX or LuaLaTeX, we can use the package
+% fontspec to correctly set the fonts
+% - RedHatText if installed and option is set to true
+% - Arial as replacement font as specified in the CD
+% - standard LaTeX font if other compiler is used
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi>0%
+	\RequirePackage[no-math]{fontspec}
+	\ifRPTU@useredhattext%
+		\setsansfont{Red Hat Text}[
+		UprightFont = RedHatText-Regular,
+		ItalicFont= RedHatText-Italic ,
+		BoldFont = RedHatText-SemiBold,
+		BoldItalicFont = RedHatText-SemiBoldItalic,
+		FontFace={k}{n}{RedHatText-Bold}]
+	\else%
+		\setsansfont{Arial}[
+		FontFace={k}{n}{Arial Black}
+		]
+	\fi%
+\else%
 \fi%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                         Load Theme                          %
@@ -149,14 +156,27 @@
 \usecolortheme{rptu} %color scheme
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            TOC                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  Itemize/Enumerate/Blocks                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setbeamertemplate{section in toc}[square]
-\setbeamertemplate{subsection in toc}[square]
+\setbeamertemplate{section in toc}{{\usebeamercolor[fg]{item in toc} \inserttocsectionnumber.}\hspace*{0.5em}\inserttocsection}
+\setbeamertemplate{subsection in toc}{\hspace*{1.5em}{\usebeamercolor[fg]{item in toc}\guilsinglright}\hspace*{1em}\inserttocsubsection\\}
 
-\setbeamertemplate{itemize items}[triangle]
-\setbeamertemplate{itemize subitems}[triangle]
+\setbeamertemplate{itemize item}{\guilsinglright\hspace*{0.5em}}
+\setbeamertemplate{itemize subitem}{\guilsinglright\hspace*{0.25em}}
+\setbeamertemplate{itemize subsubitem}{\guilsinglright\hspace*{0.2em}}
+\setbeamertemplate{enumerate item}{\theenumi.~}
+\setbeamertemplate{enumerate subitem}{\theenumi.\theenumii.~}
+
+\setlength{\leftmargini}{1.5em}
+\setlength{\leftmarginii}{1.25em}
+\setlength{\leftmarginiii}{1.2em}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=false]  
@@ -168,26 +188,21 @@
 \setbeamerfont{section title}{size=\Large, series=\bfseries}
 
 \newcommand*{\rptusectionpage}{
-\begingroup
-	\setbeamertemplate{background}{
-	\begin{tikzpicture}
-  		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
-  		\fill[color=rptu1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
-  	\end{tikzpicture}
-  	}
-\setbeamertemplate{section page}{
+	\begingroup
+	\setbeamertemplate{background canvas}{\color{rptu1}\vrule width\paperwidth height\paperheight}
+	\setbeamertemplate{section page}{
  		\begin{minipage}{0.3\paperwidth}
                        \begin{flushright} 
   			\usebeamercolor[fg]{section title}%
-			\usebeamerfont{section title}%
-                      {\bfseries\fontsize{128}{132}\selectfont\thesection}
+			\usebeamerfont{sectionpage}%
+                      {\fontseries{k}\fontsize{128}{132}\selectfont\textcolor{rptu2}{\thesection}}
 			\end{flushright}
               \end{minipage}%
 	     \hspace*{0.05\paperwidth}
 	      \begin{minipage}{0.5\paperwidth}
                        \begin{flushleft} 
   		       \usebeamercolor[fg]{section title}%
-                       \usebeamerfont{section title}\insertsectionhead\vskip0pt%
+                       \usebeamerfont{sectionpage}{\Large \insertsectionhead}\vskip0pt%
                        \ifx\insertsubsectionhead\@empty\else%
                          \usebeamercolor[fg]{subsection title}%
                          \usebeamerfont{subsection title}%
@@ -225,7 +240,7 @@
 
 \RequirePackage{tcolorbox}
 
-\newtcolorbox{rptu-twocolors}{colback=white!60!rptu2, colframe=rptu1, 
+\newtcolorbox{rptu-twocolors}{colback=rptu2, colframe=rptu1, 
 	             sharp corners, rounded corners = southeast,
 		     arc=10mm}
 

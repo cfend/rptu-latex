@@ -1,53 +1,56 @@
 \mode<presentation>
 
+% THIS HERE IS THE DEFAULT COLOR SCHEME
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                     Color Settings                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % https://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
  
-\setbeamercolor*{structure}{fg=rptuschwarz}
-\setbeamercolor*{normal text}{fg = rptuschwarz, bg=rptuweiss}
-
-% sets (sub)title, (sub)frametitle if not otherwise specified
-\setbeamercolor*{titlelike}{parent=palette secondary} 
-
-% Color palettes
-\setbeamercolor*{palette primary}{fg=rptuweiss, bg=rptu1}
-\setbeamercolor*{palette secondary}{fg=rptu2, bg=rptuweiss}
-\setbeamercolor*{palette tertiary}{fg=rptu1, bg=rptuweiss}
-\setbeamercolor*{palette quaternary}{fg= rptuweiss!20!rptu1, bg=rptuweiss}
-
 % Global Definitions including color palettes
 \setbeamercolor{structure}{fg=rptu1}
 
+% Color palettes
+\setbeamercolor*{palette primary}{fg=rptuweiss}
+\setbeamercolor*{palette secondary}{fg=rptu2}
+\setbeamercolor*{palette tertiary}{fg=rptu1, bg=rptuweiss}
+\setbeamercolor*{palette quaternary}{fg=rptu1!80, bg=rptuweiss}
 
+\setbeamercolor*{normal text}{fg = rptuschwarz, bg=rptuweiss}
+% sets (sub)title, (sub)frametitle if not otherwise specified
+\setbeamercolor*{titlelike}{parent=palette secondary} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                    Specific Choices                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Title page, part, section, subsection
 
 \setbeamercolor*{title}{parent=palette primary}
 \setbeamercolor*{title page header}{parent=palette primary}
 \setbeamercolor*{section title}{parent=palette primary}
-\setbeamercolor{section in head/foot}{parent=palette quaternary} % e.g. in navigation bar
-\setbeamercolor{subsection in head/foot}{parent=palette quaternary}
 \setbeamercolor{author}{fg=rptuweiss}
 \setbeamercolor{date}{fg=rptuweiss}
 \setbeamercolor{institute}{fg = rptuweiss}
+\setbeamercolor{slide separation line}{fg=rptu2}
+\setbeamercolor{logo short}{fg=rptuschwarz}
+
+
+% Table of Contents
+\setbeamercolor{section in toc}{fg=rptuschwarz}
+\setbeamercolor{subsection in toc}{fg=rptuschwarz}
+\setbeamercolor{item in toc}{fg=rptu2}
 
 % - Standard block
-\setbeamercolor{block title}{parent=palette primary}
-\setbeamercolor{block body}{bg = rptuweiss!60!rptu2}
+\setbeamercolor{block title}{parent=palette primary, bg=rptu1}
+\setbeamercolor{block body}{bg = rptu2!40}
 
 % - Alert block
 \setbeamercolor{block title alerted}{fg = rptuweiss, bg = rpturot}
-\setbeamercolor{block body alerted}{bg = rptuweiss!60!rptuorange}
+\setbeamercolor{block body alerted}{bg = rptuorange!40}
 
 % - Example block
 \setbeamercolor{block title example}{fg = rptuweiss, bg = rptudunkelgruen}
-\setbeamercolor{block body example}{bg = rptuweiss!60!rptuhellgruen}
+\setbeamercolor{block body example}{bg = rptuhellgruen!40}
 
 % - Footnotes
 \setbeamercolor{footnote}{parent = palette quaternary} 
@@ -57,11 +60,15 @@
 \setbeamercolor{caption}{fg = rptu1}
 \setbeamercolor{caption name}{fg = rptu1}
 
-% - Itemize/Enumerate (both) item icons -> gradient
+% - Itemize/Enumerate (both) item icons -> 
 \setbeamercolor{item}{fg = rptu1}
-\setbeamercolor{subitem}{fg = rptu1!60}
-\setbeamercolor{subsubitem}{fg = rptu1!40}
 
+% - Navigation bar
+\setbeamercolor{section in head/foot}{parent=palette quaternary} % e.g. in navigation bar
+\setbeamertemplate{section in head/foot shaded}[default][40]
+\setbeamertemplate{mini frames}[default]
+\setbeamercolor{mini frame}{parent=palette quaternary, bg=rptuweiss}
+\setbeamertemplate{mini frame in other subsection}[default][40]
 \mode
 <all>
 
