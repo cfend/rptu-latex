@@ -27,6 +27,18 @@
 \author[Mustermann]{Dr. Max Mustermann}
 \institute[Mathematik]{AG Statistik, FB Mathematik}
 
+% info for thank you page
+\usepackage[fixed]{fontawesome5}
+\thankstitle{Thank you}
+\thankssubtitle{Maybe your name}
+\thanksinfo{% your contact
+\faEnvelope[regular]~max.mustermann(at)rptu.de\\
+\faBuilding[regular]~RPTU in Kaiserslautern \\
+\faBuilding[regular]~Building~xx, Room xxx\\
+\faPhone~+49 (0)631 205 xxxx 
+% and more if needed
+}
+
 % fill this command and set ownlogo=true in \usetheme 
 % make sure to specify the width/height in \includegraphics
 % this will override the default RPTU on the title page
@@ -51,4 +63,5 @@
 
 \begin{document}
 \input{some-content}
+\rptuthankyou % creates thank you page at the end
 \end{document}

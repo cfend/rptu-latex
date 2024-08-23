@@ -28,6 +28,18 @@
 \author[Last Name]{Firstname Lastname}
 \institute[Short Institute]{Institute}
 
+% info for thank you page
+\usepackage[fixed]{fontawesome5}
+\thankstitle{Thank you}
+\thankssubtitle{Maybe your name}
+\thanksinfo{% your contact
+\faEnvelope[regular]~max.mustermann(at)rptu.de\\
+\faBuilding[regular]~RPTU in Kaiserslautern \\
+\faBuilding[regular]~Building~xx, Room xxx\\
+\faPhone~+49 (0)631 205 xxxx 
+% and more if needed
+}
+
 % fill this command and set ownlogo=true in \usetheme 
 % make sure to specify the width/height in \includegraphics
 % this will override the default RPTU on the title page
@@ -37,7 +49,6 @@
 % make sure to specify the width/height in \includegraphics
 % this will be placed in the upper right corner of the slide
 \renewcommand{\sponsorlogo}{}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                CONTENT OF PRESENTATION                %
@@ -129,5 +140,8 @@
 \begin{frame}
 	\lipsum[6]
 \end{frame}
+
+
+\rptuthankyou %create thank you page
 
 \end{document}
