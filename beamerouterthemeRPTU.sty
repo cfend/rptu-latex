@@ -190,10 +190,13 @@
 %                        Footnotes                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%https://tex.stackexchange.com/questions/455982/tiny-tightly-spaced-unnumbered-footnotes-in-beamer-presentation-possibly-with
+%\vspace*{-0.75ex} for less distance between lines and moves closer to footline
+
 \setbeamertemplate{footnote}{%
-% change left margin compared to default
-   \makebox[0.5em][l]{\scriptsize\insertfootnotemark}\scriptsize\insertfootnotetext\par%
+\hskip-0.5em\makebox[0.5em][l]{\scriptsize\insertfootnotemark}\scriptsize\insertfootnotetext\par\vspace*{-0.75ex}
 }
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
