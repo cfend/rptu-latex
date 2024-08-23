@@ -104,15 +104,16 @@
 	\else%
 	\leavevmode\hbox{%
 \begin{beamercolorbox}[wd=1cm, ht=3ex, dp=2ex, center]{footline} %
-\ifRPTU@displayTotalFrameNumber%
-	\insertframenumber/\inserttotalframenumber%
-\else%
+	\ifRPTU@displayTotalFrameNumber%
+		\insertframenumber/\inserttotalframenumber%
+	\else%
 	\insertframenumber%
-\fi
+	\fi%
 \end{beamercolorbox}%
 \begin{beamercolorbox}[wd=\footmidpart, ht=3ex, dp=2ex]{footline} 
- 		{\usebeamercolor[fg]{slide separation line}\rule[-1pt]{0.5pt}{6pt}}
- 		\hspace*{0.5em}%
+		% for an additional separation line
+ 		%{\usebeamercolor[fg]{slide separation line}\rule[-1pt]{0.5pt}{6pt}}
+ 		%\hspace*{0.5em}%
   		\usebeamerfont{footline}\insertshortauthor
   		\hspace*{0.5em}%
   		{\usebeamercolor[fg]{slide separation line}\rule[-1pt]{0.5pt}{6pt}}
@@ -132,26 +133,33 @@
 \fi%
 }
 
+% beamer user guide page 122 -> for one line box always same size -> ht=2.25ex, dp=1ex
+\newlength{\footlineheight}
+\setlength{\footlineheight}{2.25ex}
+
+\newlength{\footlinedp}
+\setlength{\footlinedp}{1ex}
+
 \defbeamertemplate*{footline}{rptuminimal}{%
 \ifnum \thepage=1%
-	\begin{beamercolorbox}[wd=1\paperwidth, ht=3ex, dp=2ex, right]{footline}%
+	\begin{beamercolorbox}[wd=1\paperwidth, ht=\footlineheight, dp=\footlinedp, right]{footline}%
 		% empty footline, need the same dimensions because otherwise beamer 
 		% is not able to compute the correct dimensions of the footline
 		% (Only computed once for the first slide, then no recomputation)
 	\end{beamercolorbox}
 	\else%
 	\leavevmode\hbox{%
-\begin{beamercolorbox}[wd=1cm, ht=3ex, dp=2ex, center]{footline} %
+\begin{beamercolorbox}[wd=1cm, ht=\footlineheight, dp=\footlinedp, center]{footline} %
 \ifRPTU@displayTotalFrameNumber%
 	\insertframenumber/\inserttotalframenumber%
 \else%
 	\insertframenumber%
-\fi
+\fi%
 \end{beamercolorbox}%
-\begin{beamercolorbox}[wd=\footmidpart, ht=3ex, dp=2ex]{footline} 
+\begin{beamercolorbox}[wd=\footmidpart, ht=\footlineheight, dp=\footlinedp]{footline} 
  		% empty mid part
 \end{beamercolorbox}%
-\begin{beamercolorbox}[wd=1.25cm, ht=3ex, dp=2ex, center]{footline} 
+\begin{beamercolorbox}[wd=1.25cm, ht=\footlineheight, dp=\footlinedp, center]{footline} 
  		\insertlogoshort%
 \end{beamercolorbox}
  }
