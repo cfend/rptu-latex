@@ -1,6 +1,8 @@
 # Unofficial LaTeX Templates following the RPTU Kaiserslautern-Landau Corporate Design
 
-Some first LaTeX templates for the new RPTU. Non official and still work in progress.
+Some first LaTeX templates for the new RPTU. Non official and always work in progress.
+A similar presentation has also recently been developed by Patrick Mischke (https://github.com/Patschke/RPTU-Design) together with some poster template.
+
 
 ## A Minimal Beamer Presentation
 
@@ -22,6 +24,11 @@ A minimal presentation without navigation bar and with main color **RPTU dunkelb
 \date{Kaiserslautern, January 5th, 2023}
 \author[Short Name]{Full Name}
 \institute[Short Institute]{Full Affiliation}
+
+% info for thank you page
+\thankstitle{Thank you title}
+\thankssubtitle{content of thanks subtitle}
+\thanksinfo{and other info as needed}
 
 % non default logos (optional)
 \renewcommand{\ownlogo}{}  % fill with logo file from logo generator
@@ -47,6 +54,8 @@ Some plain frame.
 \begin{frame}{Some Title}
 A non plain frame with title.
 \end{frame}
+
+\rptuthankyou % creates the thank you page
 
 \end{document}
 ```
@@ -100,4 +109,4 @@ A non plain frame with title.
 
 ## Notes
 
-If you want to use Red Hat Text, make sure that the static versions of the font are installed on your system. Since we use the package fontspec you cannot compile with pdflatex.
+If you want to use Red Hat Text, make sure that the static versions of the font are installed on your system. Since we use the package fontspec to load Red Hat Text you cannot compile with pdflatex.
